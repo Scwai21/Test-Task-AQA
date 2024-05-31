@@ -1,4 +1,5 @@
 import { $ } from '@wdio/globals';
+import Page from './page.js';
 
 class LoginPage extends Page {
     get usernameInput() { return $('#user-name'); }
@@ -7,8 +8,8 @@ class LoginPage extends Page {
     get errorMessage() { return $('[data-test="error"]'); }
     get errorIcon() { return $('[fill="currentColor"]'); }
 
-    async open() {
-        await super.open('https://www.saucedemo.com');
+    open() {
+        return super.open('login');
     }
 
     async login(username, password) {
@@ -23,6 +24,10 @@ class LoginPage extends Page {
 
     async isErrorIconDisplayed() {
         return this.errorIcon.isDisplayed();
+    }
+
+    async isErrorMessageDisplayed() {
+        return this.errorMessage.isDisplayed()
     }
 }
 
