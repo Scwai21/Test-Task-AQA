@@ -1,15 +1,15 @@
-describe('Checkout', () =>{
-    it('Checkout without products', async () =>{
+describe('Checkout', () => {
+    it('Checkout without products', async () => {
         await browser.url('https://www.saucedemo.com')
 
-        const LoginLabel = await $('#user-name')
-        await LoginLabel.setValue("standard_user")
+        const loginLabel = await $('#user-name')
+        await loginLabel.setValue("standard_user")
 
-        const PasswordLabel = await $('#password')
-        await PasswordLabel.setValue('secret_sauce')
+        const passwordLabel = await $('#password')
+        await passwordLabel.setValue('secret_sauce')
 
-        const LoginButton = await $('#login-button')
-        await LoginButton.click()
+        const loginButton = await $('#login-button')
+        await loginButton.click()
 
         const cart = await $('.shopping_cart_link')
         await cart.click()
@@ -23,28 +23,28 @@ describe('Checkout', () =>{
         const url2 = await browser.getUrl()
         expect(url2).toBe('https://www.saucedemo.com/cart.html')
     })
-    it('Valid checkout', async () =>{
+
+    it('Valid checkout', async () => {
         await browser.url('https://www.saucedemo.com')
 
-        const LoginLabel = await $('#user-name')
-        await LoginLabel.setValue("standard_user")
+        const loginLabel = await $('#user-name')
+        await loginLabel.setValue("standard_user")
 
-        const PasswordLabel = await $('#password')
-        await PasswordLabel.setValue('secret_sauce')
+        const passwordLabel = await $('#password')
+        await passwordLabel.setValue('secret_sauce')
 
-        const LoginButton = await $('#login-button')
-        await LoginButton.click()
+        const loginButton = await $('#login-button')
+        await loginButton.click()
 
         const product = await $('#item_4_title_link')
         const productName = await product.getText()
         const price = await $('.inventory_item_price')
         const productPrice = await price.getText()
-        const add_to_cart = await $('#add-to-cart-sauce-labs-backpack')
-        await add_to_cart.click()
+        const addToCart = await $('#add-to-cart-sauce-labs-backpack')
+        await addToCart.click()
 
         const score = await $('.shopping_cart_badge')
         const scoreNumber = await score.getText()
-
         expect(scoreNumber).toBe('1')
 
         const cart = await $('.shopping_cart_link')
@@ -72,11 +72,11 @@ describe('Checkout', () =>{
         await continueButton.click()
 
         const totalPrice = await $('.summary_subtotal_label')
-        const item_total = await totalPrice.getText()
+        const itemTotal = await totalPrice.getText()
         const url3 = await browser.getUrl()
         expect(url3).toBe('https://www.saucedemo.com/checkout-step-two.html')
         expect(productName).toBe('Sauce Labs Backpack')
-        expect('Item total: ' +productPrice).toBe(item_total)
+        expect('Item total: ' + productPrice).toBe(itemTotal)
 
         const finishButton = await $('#finish')
         await finishButton.click()
@@ -88,8 +88,8 @@ describe('Checkout', () =>{
         const receiveMessage = await message.getText()
         expect(receiveMessage).toBe('Thank you for your order!')
 
-        const back_homeButton = await $('#back-to-products')
-        await back_homeButton.click()
+        const backHomeButton = await $('#back-to-products')
+        await backHomeButton.click()
 
         const url5 = await browser.getUrl()
         expect(url5).toBe('https://www.saucedemo.com/inventory.html')
