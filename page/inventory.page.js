@@ -1,5 +1,5 @@
 import { $ } from '@wdio/globals';
-import Page from './page.js';
+import Page from './../page.js';
 
 class InventoryPage extends Page {
     get cartIcon() { return $('.shopping_cart_link'); }
@@ -9,57 +9,56 @@ class InventoryPage extends Page {
     get allItems() { return $('#inventory_sidebar_link'); }
     get about() { return $('#about_sidebar_link'); }
     get resetAppState() { return $('#reset_sidebar_link'); }
-    get sortDropdown() {return $('.product_sort_container')}
-    get checkoutButton() {return $('#checkout')}
-    get score() {return $('n.shopping_cart_badge')}
-    get firstName() {return $('#first-name')}
-    get lastName() {return $('#last-name')}
-    get zipCode() {return $('#postal-code')}
-    get continueButton() {return$('#continue')}
+    get sortDropdown() { return $('.product_sort_container'); }
+    get checkoutButton() { return $('#checkout'); }
+    get score() { return $('.shopping_cart_badge'); } 
+    get firstName() { return $('#first-name'); }
+    get lastName() { return $('#last-name'); }
+    get zipCode() { return $('#postal-code'); }
+    get continueButton() { return $('#continue'); } 
 
-
-    async order(name, surname, code){
-        await this.firstName.setValue(name)
-        await this.lastName.setValue(surname)
-        await this.zipCode.setValue(code)
-        await this.continueButton.click()
-    }
-    
-    async clickOnCheckout(){
-        await this.checkoutButton.click()
+    async order(name, surname, code) {
+        await this.firstName.setValue(name);
+        await this.lastName.setValue(surname);
+        await this.zipCode.setValue(code);
+        await this.continueButton.click();
     }
 
-    async addToCart(id){
-        const product = await $(id)
-        await product.click()
+    async clickOnCheckout() {
+        await this.checkoutButton.click();
     }
 
-    async checkScoreNumber(){
-        return this.score.getText()
+    async addToCart(id) {
+        const product = await $(id);
+        await product.click();
     }
 
-    async PriceLowToHigh(){
-        await this.sortDropdown.selectByVisibleText('Price (low to high)')
+    async checkScoreNumber() {
+        return this.score.getText();
     }
 
-    async PriceHighToLow(){
-        await sortDropdown.selectByVisibleText('Price (high to low)')
+    async PriceLowToHigh() {
+        await this.sortDropdown.selectByVisibleText('Price (low to high)');
     }
 
-    async NameAToZ(){
-        await sortDropdown.selectByVisibleText('Name (A to Z)')
+    async PriceHighToLow() {
+        await this.sortDropdown.selectByVisibleText('Price (high to low)'); // исправлено: добавлено this.
     }
 
-    async NameZToA(){
-        await sort.sortDropdown.selectByVisibleText('Name (Z to A)')
+    async NameAToZ() {
+        await this.sortDropdown.selectByVisibleText('Name (A to Z)'); // исправлено: добавлено this.
+    }
+
+    async NameZToA() {
+        await this.sortDropdown.selectByVisibleText('Name (Z to A)'); // исправлено: было await sort.sortDropdown
     }
 
     async isCartIconDisplayed() {
         return this.cartIcon.isDisplayed();
     }
 
-    async clickOnCart(){
-        await this.cartIcon.click()
+    async clickOnCart() {
+        await this.cartIcon.click();
     }
 
     async isInventoryListDisplayed() {

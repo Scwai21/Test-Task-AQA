@@ -1,7 +1,7 @@
 import { $ } from '@wdio/globals';
-import Page from './page.js';
+import Page from './../page.js';
 
-class FotterPage extends Page{
+class FooterPage extends Page{
     get twitter() {return $('[href="https://twitter.com/saucelabs"]')}
     get facebook() {return $('[href="https://www.facebook.com/saucelabs"]')}
     get linkedin() {return $('[href="https://www.linkedin.com/company/sauce-labs/"]')}
@@ -18,3 +18,5 @@ class FotterPage extends Page{
         await this.linkedin.click()
     }
 }
+
+export default new FooterPage();
